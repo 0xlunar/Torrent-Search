@@ -12,6 +12,10 @@ pip install -r ./requirements.txt
 
 Add directory to PATH
 
+Update torrent-search.cmd with the directory to the search.py file
+
+example (python "C:\PATH\TO\REPO\search.py" %*)
+
 ## Usage
 
 torrent-search -h
