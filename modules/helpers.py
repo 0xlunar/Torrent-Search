@@ -1,4 +1,5 @@
 import os, json, sys, subprocess
+from modules import downloader
 from prettytable import PrettyTable
 
 def select(choices, *keys):
@@ -28,7 +29,8 @@ def create_magnet_uri(hash, slug):
     with open(f"{os.path.dirname(os.path.dirname(os.path.abspath(__file__)))}/trackers.json", "r") as f:
         trackers = json.load(f)
     magnet = f"magnet:?xt=urn:btih:{hash}&dn={slug}" + "".join(f"&tr={tracker}" for tracker in trackers)
-    open_magnet(magnet)
+    downloader.download_torrent(magnet)
+    #open_magnet(magnet)
     
 def open_magnet(magnet): # source: https://stackoverflow.com/a/47526812
     """Open magnet according to os."""

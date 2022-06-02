@@ -25,7 +25,8 @@ def search(query):
                 results = table_to_dict(results, headers)
                 headers.pop(1)
                 selected = helpers.select(results, *tuple(headers))
-                helpers.open_magnet(selected['magnet'])
+                #helpers.open_magnet(selected['magnet'])
+                helpers.downloader.download_torrent(selected['magnet'])
     except Exception as e:
         print(e)
     
