@@ -30,6 +30,7 @@ def search(query):
             results = soup.find("tbody").find_all("tr")
             headers = soup.find("thead").find_all("tr")
             headers = [el.text for el in headers[0].find_all("th")]
+            headers.append("type")
             if len(results) == 0:
                 print("No results found.")
                 return
@@ -51,6 +52,7 @@ def table_to_dict(table, headers):
     results = []
     for row in table:
         d = {headers[i]: el.text for i, el in enumerate(row.find_all("td"))}
+        d["type"] = row.find_all("a", {"class":"icon"}, href=True)[0].find("i")['class'][0].replace("flaticon-", "").split(" ")[0]
         d["url"] = "https://1337x.to" + row.find_all("a", href=True)[1]["href"]
         results.append(d)
     return results
