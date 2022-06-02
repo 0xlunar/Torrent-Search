@@ -23,7 +23,6 @@ def search(query):
                 return
             else:
                 results = table_to_dict(results, headers)
-                print(headers)
                 headers.pop(1)
                 selected = helpers.select(results, *tuple(headers))
                 helpers.open_magnet(selected['magnet'])
