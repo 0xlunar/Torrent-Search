@@ -36,7 +36,6 @@ def fetch_magnet_hash(url, session):
         
 def table_to_dict(table, headers):
     results = []
-    print(headers)
     for row in table:
         d = {headers[i]: el.text for i, el in enumerate(row.find_all("td")[:-1])}
         d["url"] = "https://www.limetorrents.lol" + row.find_all("a", href=True)[1]["href"]
