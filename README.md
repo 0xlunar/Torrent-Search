@@ -23,3 +23,11 @@ torrent-search -h
 torrent-search -q Query Goes Here
 
 torrent-search -q Query Goes Here -p Provider 
+
+
+## Providers
+
+- YTS
+- 1337x
+- LimeTorrents
+- EzTv 
