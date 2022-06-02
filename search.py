@@ -1,9 +1,9 @@
 import argparse
-from modules import yts, leetx, limetorrents
+from modules import yts, leetx, limetorrents, eztv
 
 parser = argparse.ArgumentParser(description="Search for a movie on the internet.")
 parser.add_argument("--query", "-q", help="The movie to search for. (Supports IMDB Id's)", nargs='+', required=True)
-parser.add_argument("--provider", "-p", help="The provider to search for the movie on. (Default: YTS)", default="yts", choices=["yts", "1337x", "limetorrents", "lime"])
+parser.add_argument("--provider", "-p", help="The provider to search for the movie on. (Default: YTS)", default="yts", choices=["yts", "1337x", "limetorrents", "lime", "eztv"])
 
 args = parser.parse_args()
 
@@ -12,5 +12,7 @@ if (args.query):
         leetx.search(args.query)
     elif args.provider == "limetorrents" or args.provider == "lime":
         limetorrents.search(args.query)
+    elif args.provider == "eztv":
+        eztv.search(args.query)
     else:
         yts.search(args.query)
