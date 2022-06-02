@@ -2,7 +2,7 @@ import requests, re
 from modules import helpers
 from bs4 import BeautifulSoup as bs
 
-def search(query):
+def search(query, autoDownload=True):
     headers = {
         "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
         "accept-language": "en-US,en;q=0.9,en-AU;q=0.8",
@@ -25,8 +25,11 @@ def search(query):
                 results = table_to_dict(results, headers)
                 headers.pop(1)
                 selected = helpers.select(results, *tuple(headers))
-                #helpers.open_magnet(selected['magnet'])
-                helpers.downloader.download_torrent(selected['magnet'])
+                if autoDownload:
+                    helpers.downloader.download_torrent(selected['magnet'])
+                else:
+                    helpers.open_magnet(selected['magnet'])
+                
     except Exception as e:
         print(e)
     

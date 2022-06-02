@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup as bs
 
 
 
-def search(query):
+def search(query, autoDownload=True):
     headers = {
         "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
         "accept-language": "en-US,en;q=0.9,en-AU;q=0.8",
@@ -38,7 +38,7 @@ def search(query):
                 results = table_to_dict(results, headers)
                 selected = helpers.select(results, *tuple(headers))
                 magnet = fetch_magnet_hash(results[0]["url"], s)
-                helpers.create_magnet_uri(magnet, selected[headers[0]])
+                helpers.create_magnet_uri(magnet, selected[headers[0]], autoDownload)
     except Exception as e:
         print(e)
         

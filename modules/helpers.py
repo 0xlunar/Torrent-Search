@@ -25,12 +25,14 @@ def select(choices, *keys):
 def value_to_list(dictionary, *keys):
     return [f"{dictionary[key]}" for key in keys]
 
-def create_magnet_uri(hash, slug):
+def create_magnet_uri(hash, slug, download=True):
     with open(f"{os.path.dirname(os.path.dirname(os.path.abspath(__file__)))}/trackers.json", "r") as f:
         trackers = json.load(f)
     magnet = f"magnet:?xt=urn:btih:{hash}&dn={slug}" + "".join(f"&tr={tracker}" for tracker in trackers)
-    downloader.download_torrent(magnet)
-    #open_magnet(magnet)
+    if (download):
+        downloader.download_torrent(magnet)
+    else:
+        open_magnet(magnet)
     
 def open_magnet(magnet): # source: https://stackoverflow.com/a/47526812
     """Open magnet according to os."""
