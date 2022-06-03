@@ -3,11 +3,6 @@ from qbittorrentapi import Client
 
 client = Client(host='localhost:9998', username='admin', password='adminadmin')
 
-try:
-    client.auth_log_in()
-except qbittorrentapi.LoginFailed as e:
-    print(e)
-
 def endswith_list(item, list):
     for i in list:
         if item.endswith(i):
@@ -26,6 +21,11 @@ def disable_bad_extensions(hash):
 
 def download_torrent(magnet):
     try:
+        try:
+            client.auth_log_in()
+        except qbittorrentapi.LoginFailed as e:
+            print(e)
+            return
         client.torrents_add(magnet)
         hash = magnet.split("&")[0].split("btih:")[1]
         print("Started Torrent, waiting for initialisation...")
